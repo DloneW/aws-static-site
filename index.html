@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="A hands-on cloud project demonstrating secure static website hosting with Amazon S3, CloudFront, Route 53 and AWS Certificate Manager."
+    >
+    <title>Secure Static Website | AWS Cloud Project</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+            <a class="brand" href="#home">CLOUD<span>LAB</span></a>
+
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="nav-links"
+                aria-label="Toggle navigation"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#workflow">Workflow</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero container" id="home">
+            <p class="eyebrow">AWS CLOUD ENGINEERING PROJECT</p>
+
+            <h1>
+                Deliver websites
+                <span>securely at scale.</span>
+            </h1>
+
+            <p class="hero-description">
+                A practical demonstration of static website hosting using
+                Amazon S3, CloudFront, Route 53 and AWS Certificate Manager.
+            </p>
+
+            <div class="hero-actions">
+                <a class="button button-primary" href="#architecture">
+                    Explore the architecture
+                </a>
+                <a class="button button-secondary" href="#workflow">
+                    View the workflow
+                </a>
+            </div>
+
+            <div class="project-status">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Project status: Local development</span>
+            </div>
+        </section>
+
+        <section class="architecture section" id="architecture">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">THE SYSTEM</p>
+                    <h2>Four services. One delivery pipeline.</h2>
+                    <p>
+                        Each AWS service has a specific responsibility in
+                        delivering the website to its visitors.
+                    </p>
+                </div>
+
+                <div class="service-grid">
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">01</div>
+                        <p class="service-category">STORAGE</p>
+                        <h3>Amazon S3</h3>
+                        <p>
+                            Stores the HTML, CSS, JavaScript and image files
+                            that make up the website.
+                        </p>
+                        <span class="service-tag">Private origin</span>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">02</div>
+                        <p class="service-category">CONTENT DELIVERY</p>
+                        <h3>Amazon CloudFront</h3>
+                        <p>
+                            Caches content at edge locations and delivers
+                            website files to visitors over HTTPS.
+                        </p>
+                        <span class="service-tag">CDN and HTTPS</span>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">03</div>
+                        <p class="service-category">DNS</p>
+                        <h3>Amazon Route 53</h3>
+                        <p>
+                            Connects the custom domain name to the CloudFront
+                            distribution through DNS records.
+                        </p>
+                        <span class="service-tag">Domain routing</span>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">04</div>
+                        <p class="service-category">CERTIFICATES</p>
+                        <h3>AWS Certificate Manager</h3>
+                        <p>
+                            Provides the TLS certificate used to establish
+                            encrypted HTTPS connections.
+                        </p>
+                        <span class="service-tag">TLS certificate</span>
+                    </article>
+                </div>
+
+                <p class="architecture-note">
+                    Security design: S3 remains private. CloudFront accesses
+                    the origin through Origin Access Control (OAC).
+                </p>
+            </div>
+        </section>
+
+        <section class="workflow section" id="workflow">
+            <div class="container workflow-layout">
+                <div class="section-heading">
+                    <p class="eyebrow">REQUEST LIFECYCLE</p>
+                    <h2>What happens when someone visits the website?</h2>
+                    <p>
+                        A simplified view of how the services work together.
+                    </p>
+                </div>
+
+                <ol class="workflow-list">
+                    <li>
+                        <span class="workflow-number">01</span>
+                        <div>
+                            <h3>Resolve the domain</h3>
+                            <p>
+                                Route 53 directs the domain to CloudFront.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="workflow-number">02</span>
+                        <div>
+                            <h3>Establish HTTPS</h3>
+                            <p>
+                                CloudFront presents its configured TLS
+                                certificate to the browser.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="workflow-number">03</span>
+                        <div>
+                            <h3>Deliver the content</h3>
+                            <p>
+                                CloudFront serves a cached response or
+                                retrieves the required file from S3.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="workflow-number">04</span>
+                        <div>
+                            <h3>Protect the origin</h3>
+                            <p>
+                                OAC allows the configured CloudFront
+                                distribution to access private S3 objects.
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="about section" id="about">
+            <div class="container about-content">
+                <p class="eyebrow">BUILT TO LEARN</p>
+                <h2>Learning cloud engineering through implementation.</h2>
+                <p>
+                    This project demonstrates how storage, content delivery,
+                    DNS and certificate management fit together in a
+                    maintainable cloud architecture.
+                </p>
+                <p class="disclaimer">
+                    This is a project demonstration. The AWS infrastructure
+                    has not yet been deployed or verified.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <a class="brand" href="#home">CLOUD<span>LAB</span></a>
+            <p>Built as a hands-on AWS learning project.</p>
+            <a href="#home">Back to top ↑</a>
+        </div>
+    </footer>
+</body>
+</html>
