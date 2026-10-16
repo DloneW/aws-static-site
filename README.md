@@ -1,60 +1,61 @@
-# AWS Static Website
+# Secure Static Website on AWS
 
-A responsive static website built with HTML, CSS, and JavaScript as a hands-on project for learning AWS infrastructure, Git, and deployment workflows.
+A responsive static website deployed using Amazon S3 and Amazon CloudFront. This project demonstrates static website hosting, secure origin access, HTTPS delivery, and basic cloud security principles.
 
-## Project Status
+**Project status: Deployed and verified through CloudFront.**
 
-**Current stage:** Website built locally and source code pushed to GitHub.
+## Live Deployment
 
-The website has not yet been deployed to AWS. AWS infrastructure and public hosting will be configured and verified in later stages.
+- **Website:** `https://d1h82gmzkhk252.cloudfront.net/`
+- **Hosting:** Amazon S3
+- **Content delivery:** Amazon CloudFront
+- **Origin security:** CloudFront Origin Access Control (OAC)
+- **S3 region:** Europe (Stockholm), `eu-north-1`
+- **Custom domain:** Not configured
+
+
+## Architecture
+
+The website uses Amazon S3 to store static assets and Amazon CloudFront to deliver them to visitors over HTTPS.
+
+```text
+Visitor
+   |
+   | HTTPS
+   v
+Amazon CloudFront
+   |
+   | Origin Access Control (OAC)
+   v
+Private Amazon S3 Bucket
+   |
+   +-- index.html
+   +-- style.css
+   +-- script.js
+```
+
+The S3 bucket remains private. CloudFront accesses the objects through an S3 bucket policy that restricts access to the intended CloudFront distribution.
 
 ## Features
 
 - Responsive layout for desktop and mobile screens
-- Mobile navigation menu
-- Semantic HTML structure
-- Keyboard-accessible navigation controls
-- CSS styling with responsive breakpoints
-- JavaScript for mobile menu interactions
+- HTML structure with CSS styling
+- JavaScript-powered mobile navigation
+- HTTPS delivery through CloudFront
+- Private S3 origin
+- CloudFront Origin Access Control
+- Default root object configured as `index.html`
+- Restricted S3 object access through a CloudFront-specific bucket policy
 
-## Technologies
+## Technologies and AWS Services
 
 - HTML5
 - CSS3
 - JavaScript
-- Git and GitHub
-
-## Planned AWS Architecture
-
-The intended deployment architecture is:
-
-1. **Amazon S3:** Store the static website files in a private bucket.
-2. **Amazon CloudFront:** Deliver website content over HTTPS.
-3. **Origin Access Control (OAC):** Allow CloudFront to access the private S3 origin.
-4. **Amazon Route 53:** Route a custom domain to CloudFront.
-5. **AWS Certificate Manager (ACM):** Provide the TLS certificate for HTTPS.
-
-These AWS resources are planned, not yet deployed or verified.
-
-## Run Locally
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/DloneW/aws-static-site.git
-   ```
-
-2. Enter the project directory:
-
-   ```bash
-   cd aws-static-site
-   ```
-
-3. Open `index.html` in a browser.
-
-Alternatively, open the folder in Visual Studio Code and use a local development server.
-
-No package installation or build process is currently required.
+- Amazon S3
+- Amazon CloudFront
+- CloudFront Origin Access Control (OAC)
+- AWS bucket policies
 
 ## Project Structure
 
@@ -67,24 +68,73 @@ aws-static-site/
 └── README.md
 ```
 
+## Local Development
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/DloneW/aws-static-site.git
+   ```
+
+2. Open the project directory:
+
+   ```bash
+   cd aws-static-site
+   ```
+
+3. Open `index.html` in a browser to inspect the website locally.
+
+No build process is required for the current static implementation.
+
+## Deployment and Verification
+
+The following steps have been completed:
+
+1. Created an S3 bucket in `eu-north-1`.
+2. Uploaded `index.html`, `style.css`, and `script.js`.
+3. Created a CloudFront distribution using the S3 bucket as its origin.
+4. Enabled CloudFront access to the private S3 origin.
+5. Configured `index.html` as the default root object.
+6. Confirmed the website loads through the CloudFront HTTPS URL.
+7. Verified that the direct S3 object URL returns `AccessDenied`.
+8. Inspected the bucket policy and confirmed it restricts CloudFront access to the intended distribution.
+9. Tested the page layout, CSS styling, and mobile navigation.
+
+## Security Considerations
+
+- Keep S3 Block Public Access enabled.
+- Use CloudFront Origin Access Control instead of making the bucket public.
+- Grant only the permissions required for content delivery.
+- Monitor AWS usage and billing alerts.
+- Avoid publishing credentials, account secrets, or sensitive configuration data.
+- Treat the current deployment as a learning project, not a production security certification.
+
+## Future Improvements
+
+- Configure a custom domain and DNS routing with Amazon Route 53.
+- Configure a custom TLS certificate through AWS Certificate Manager if a custom domain is added.
+- Automate deployment from GitHub.
+- Add a documented cache invalidation workflow.
+- Explore infrastructure as code with AWS CloudFormation.
+- Improve operational monitoring and cost management.
+
 ## Learning Objectives
 
-- Understand static website hosting
-- Learn how Amazon S3 and CloudFront work together
-- Configure a private S3 origin using CloudFront OAC
-- Understand DNS routing and HTTPS certificates
-- Practise Git version control and deployment workflows
-- Recreate validated infrastructure using AWS CloudFormation
+This project provides practical experience with:
 
-## Security Notes
-
-- Keep the S3 bucket private when using CloudFront OAC.
-- Do not commit AWS access keys, passwords, private keys, or other secrets.
-- Review AWS permissions and estimated costs before creating resources.
-- Verify security settings and deployment behaviour rather than assuming they are correct.
+- Static website architecture
+- Object storage and S3 permissions
+- Content delivery networks
+- HTTPS delivery
+- Origin Access Control
+- Least-privilege access principles
+- Cloud deployment verification
+- Technical documentation
 
 ## Author
 
 **Dlone**
 
-Cybersecurity student learning cloud infrastructure and secure deployment through practical projects.
+Cybersecurity student exploring cloud security, infrastructure, and secure web deployment.
+
+GitHub: [DloneW](https://github.com/DloneW)
